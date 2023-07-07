@@ -1,29 +1,31 @@
+import 'package:flutter_device_auth/local_auth_enum.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'flutter_device_auth_method_channel.dart';
 
-abstract class FlutterDeviceAuthPlatform extends PlatformInterface {
-  /// Constructs a FlutterDeviceAuthPlatform.
-  FlutterDeviceAuthPlatform() : super(token: _token);
+abstract class LocalAuthPlatform {
+  static LocalAuthPlatform instance = MethodChannelLocalAuth();
 
-  static final Object _token = Object();
-
-  static FlutterDeviceAuthPlatform _instance = MethodChannelFlutterDeviceAuth();
-
-  /// The default instance of [FlutterDeviceAuthPlatform] to use.
-  ///
-  /// Defaults to [MethodChannelFlutterDeviceAuth].
-  static FlutterDeviceAuthPlatform get instance => _instance;
-
-  /// Platform-specific implementations should set this with their own
-  /// platform-specific class that extends [FlutterDeviceAuthPlatform] when
-  /// they register themselves.
-  static set instance(FlutterDeviceAuthPlatform instance) {
-    PlatformInterface.verifyToken(instance, _token);
-    _instance = instance;
+  Future<AuthStatus> biometricWithPin(
+      {required String title,
+        required String subTitle,
+        required String description,
+        required String buttonText}) {
+    throw UnimplementedError('test() has not been implemented.');
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  Future<AuthStatus> biometric(
+      {required String title,
+        required String subTitle,
+        required String description,
+        required String buttonText}) {
+    throw UnimplementedError('test() has not been implemented.');
+  }
+
+  Future<AuthStatus> pin(
+      {required String title,
+        required String subTitle,
+        required String description}) {
+    throw UnimplementedError('test() has not been implemented.');
   }
 }
